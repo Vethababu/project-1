@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Resume Builder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    form input, form textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-right: 10px;
+      padding: 10px 15px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+    #resumePreview {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background: #fafafa;
+    }
+    #resumePreview h2, #resumePreview h3 {
+      margin: 5px 0;
+    }
+    #resumePreview ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Smart Resume Builder</h1>
+    <form id="resumeForm">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="text" id="title" placeholder="Job Title" required />
+      <textarea id="summary" placeholder="Professional Summary"></textarea>
+      <textarea id="skills" placeholder="Skills (comma separated)"></textarea>
+      <button type="submit">Update Preview</button>
+    </form>
+
+    <button id="aiSuggest">AI Suggest</button>
+    <button id="downloadPDF">Download PDF</button>
+
+    <div id="resumePreview">
+      <h2 id="previewName"></h2>
+      <h3 id="previewTitle"></h3>
+      <p id="previewSummary"></p>
+      <ul id="previewSkills"></ul>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('resumeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const title = document.getElementById('title').value;
+      const summary = document.getElementById('summary').value;
+      const skills = document.getElementById('skills').value.split(',');
+
+      document.getElementById('previewName').textContent = name;
+      document.getElementById('previewTitle').textContent = title;
+      document.getElementById('previewSummary').textContent = summary;
+
+      const skillsList = document.getElementById('previewSkills');
+      skillsList.innerHTML = '';
+      skills.forEach(skill => {
+        const li = document.createElement('li');
+        li.textContent = skill.trim();
+        skillsList.appendChild(li);
+      });
+    });
+
+    document.getElementById('aiSuggest').addEventListener('click', function() {
+      alert("✨ AI Suggestion: Add quantifiable achievements to your summary!");
+    });
+
+    document.getElementById('downloadPDF').addEventListener('click', function() {
+      window.print(); // Simple PDF export via browser print
+    });
+  </script>
+</body>
+</html>
